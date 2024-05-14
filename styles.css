@@ -1,0 +1,109 @@
+
+
+body {
+  background: black;
+  
+}
+
+ol {
+  color: white;
+  list-style: decimal;
+  padding: 0 1em;
+}
+
+ul {
+  color: white;
+  list-style-type: disc;
+  padding: 0 1em;
+}
+
+.preview-panel ol {
+  color: black;
+  list-style: decimal;
+}
+
+.preview-panel ul {
+  color: black;
+  list-style-type: disc;
+}
+
+.preview-panel blockquote {
+  border-left: 3px solid black;
+  padding-left: 12px;
+  color: black;
+}
+
+pre {
+  background-color: #1F2937;
+  color: white;
+  word-break: break-all;
+  width: 100%;
+  line-break: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.233);
+  cursor: pointer;
+  overflow-x: auto;
+}
+
+markdown a {
+  color: #39CDFB;
+  border-bottom: 1px solid #39CDFB;
+}
+
+markdown a:hover {
+  color: #39fbfb;
+  border-bottom: 1px solid #39fbfb;
+}
+
+markdown img {
+  height: 50vh;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.233);
+  cursor: pointer;
+}
+
+blockquote {
+  border-left: 3px solid rgba(255, 255, 255, 0.21);
+  padding-left: 12px;
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.tool-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 5px 8px;
+}
+
+.btn:hover {
+  background: #D1D5DB;
+}
+
+::-webkit-scrollbar {
+  width: 1em;
+  height: 0.6em;
+}
+
+body ::-webkit-scrollbar-track {
+  background-color: #111827;
+}
+
+body ::-webkit-scrollbar-thumb {
+  background-color: white;
+}
+
+::selection {
+  background: "#374151";
+  color: "white";
+}
+
+/*# sourceMappingURL=styles.css.map */

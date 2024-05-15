@@ -8,6 +8,7 @@ const onClickScroll = (elementId) => {
 const showMenuButton = document.getElementById("showMenuButton");
 const closeMenuButton = document.getElementById("closeMenuButton");
 const smScrnNavbar = document.getElementById("smScrnNavbar");
+const enquiryFormModal = document.getElementById("enquiryFormModal");
 
 const showMobileNavBar = () => {
   showMenuButton.style.display = "none";
@@ -295,7 +296,7 @@ function appendServices() {
                  <p class="text-lg">${item.details}</p>
                </div>
              </div>
-             <button class="w-full bg-white text-black font-medium text-base tracking-wider font py-2 rounded shadow-md " onclick="showEnquiryModal('${item.name}')" >
+             <button class="w-full bg-white text-black font-medium text-base tracking-wider font py-2 rounded shadow-md" onclick = "showEnquiryModal(${item.name})">
                Enquire Now
              </button>
            </div>`;
@@ -309,83 +310,14 @@ function appendEnquiryModal(itemName) {
   enquiryFormModal.innerHTML = "";
 
   let htmlContent = "";
-  let formHTML = `<h2 class="font-bold text-xl px-4 py-2">${itemName}</h2>
-  <div class="p-4">
-    <form class="flex flex-col" onsubmit="submitForm(event)">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
-        <input type="text" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required />
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2">Mobile Number</label>
-        <input type="tel" name="number" maxLength="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required />
-      </div>
-      <div class="hidden">
-        <input type="text" name="category" />
-      </div>
-      <div class="hidden">
-        <input type="text" name="type" />
-      </div>
-      <div class="hidden">
-        <input type="text" name="ip_address" />
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2">Type</label>
-        <select name="select" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required placeholder="Click to select a type" >
-        <option>Click to choose </option>
-        ${generateOptionsHTML(itemName)}
-        </select>
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2">Describe your project</label>
-        <textarea name="describe" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-      </div>
-      <div class="flex gap-4 justify-end">
-        <button type="button" class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="closeDialog()">Cancel</button>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          <div class="flex justify-between items-center w-full gap-2">
-            <span>Submit</span>
-          </div>
-        </button>
-      </div>
-    </form>
-  </div>
-  
-   `;
-  htmlContent += formHTML;
-  enquiryFormModal.innerHTML = htmlContent;
-}
-
-function generateOptionsHTML(itemName) {
-  let optionsHTML = "";
-  for (const option of serviceItemOptions) {
-    if (option.type === itemName) {
-      optionsHTML += `<option value="${option.value}">${option.label}</option>`;
-    }
-  }
-  return optionsHTML;
+  console.log(itemName);
 }
 
 function showEnquiryModal(itemName) {
   enquiryFormModal.showModal();
   enquiryFormModal.style.display = "block";
   appendEnquiryModal(itemName);
-  console.log(itemName);
 }
-
-//Function to close modal when clicked outside
-enquiryFormModal.addEventListener("click", (e) => {
-  const dialogDimensions = enquiryFormModal.getBoundingClientRect();
-  if (
-    e.clientX < dialogDimensions.left ||
-    e.clientX > dialogDimensions.right ||
-    e.clientY < dialogDimensions.top ||
-    e.clientY > dialogDimensions.bottom
-  ) {
-    enquiryFormModal.close();
-    enquiryFormModal.style.display = "none";
-  }
-});
 
 let ProjectItems = [
   {

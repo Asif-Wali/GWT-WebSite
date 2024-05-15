@@ -1,8 +1,5 @@
-
-
 body {
   background: black;
-  
 }
 
 ol {
@@ -34,7 +31,7 @@ ul {
 }
 
 pre {
-  background-color: #1F2937;
+  background-color: #1f2937;
   color: white;
   word-break: break-all;
   width: 100%;
@@ -47,8 +44,8 @@ pre {
 }
 
 markdown a {
-  color: #39CDFB;
-  border-bottom: 1px solid #39CDFB;
+  color: #39cdfb;
+  border-bottom: 1px solid #39cdfb;
 }
 
 markdown a:hover {
@@ -85,19 +82,19 @@ blockquote {
 }
 
 .btn:hover {
-  background: #D1D5DB;
+  background: #d1d5db;
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 1em;
   height: 0.6em;
 }
 
-body ::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   background-color: #111827;
 }
 
-body ::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   background-color: white;
 }
 

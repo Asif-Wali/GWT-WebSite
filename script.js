@@ -90,7 +90,7 @@ let ServicesItems = [
     name: "Mobile Development",
     details:
       "Our mobile development services encompass both Android and iOS platforms, ensuring widespread reach and engagement for our clients.",
-    image: "https://qfonapp.com/assets/img/android.png",
+    image: "./assets/AdobeStock_717318865_Preview-transformed.jpeg",
   },
   {
     name: "UI/UX Design",
@@ -109,7 +109,7 @@ let ServicesItems = [
     name: "Cloud Management",
     details:
       "Our expert team takes care of all aspects of cloud and website management, allowing our clients to focus on their core business activities.",
-    image: "../assets/images/cloud_management.jpeg",
+    image: "./assets/cloud_management.jpeg",
   },
   {
     name: "SEO",

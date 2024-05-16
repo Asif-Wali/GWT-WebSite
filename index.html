@@ -65,13 +65,13 @@
     <style>
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
-          /* display: none; <- Crashes Chrome on hover */
-          -webkit-appearance: none;
-          margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
       }
 
-      input[type=number] {
-          -moz-appearance:textfield; /* Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield; /* Firefox */
       }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -129,10 +129,8 @@
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "hdydndnsvy");
     </script>
-
   </head>
-  <body >
-      
+
   <body class="mat-typography">
     <div class="w-full scroll-smooth">
       <section id="home" class="h-screen bg-[#161113]">
@@ -353,91 +351,142 @@
       </section>
       <!-- This is form -->
       <section id="form" class="bg-gray-900 min-h-[70vh]">
-        <app-form>
-          <div
-            class="h-full flex flex-col md:flex-row text-white container mx-auto p-5 pb-10 justify-start"
-          >
-            <div class="h-full w-full md:w-[45%] mx-auto">
-              <h1 class="text-white py-4 lg:py-8 lg:text-2xl xl:text-3xl">
-                Get in Touch with us
-              </h1>
-              <div class="flex flex-col gap-5">
-                <div>
-                  <h2>Our Location</h2>
-                  <a
-                    href="https://maps.app.goo.gl/5umUBf8cgBJUqWTf6"
-                    target="_blank"
+        <div
+          class="h-full flex flex-col md:flex-row text-white container mx-auto p-5 pb-10 justify-start"
+        >
+          <div class="h-full w-full md:w-[45%] mx-auto">
+            <h1 class="text-white py-4 lg:py-8 lg:text-2xl xl:text-3xl">
+              Get in Touch with us
+            </h1>
+            <div class="flex flex-col gap-6">
+              <div class="flex flex-col gap-3" >
+                <h2 class="text-[20px] tracking-wider font-medium">Our Location</h2>
+                <a
+                  href="https://maps.app.goo.gl/5umUBf8cgBJUqWTf6"
+                  target="_blank"
+                >
+                  <span class="text-gray-300">
+                    BDA Layout, 4th Block, HBR Layout, Nagavara, Bengaluru,
+                    Karnataka 560045
+                  </span>
+                </a>
+              </div>
+              <div class="flex flex-col gap-3" >
+                <h2 class="text-[20px] tracking-wider font-medium">Phone Number</h2>
+                <a href="tel:+919620474135">
+                  <span class="text-gray-300">+919620474135</span>
+                </a>
+              </div>
+              <div class="flex flex-col gap-3" >
+                <h2 class="text-[20px] tracking-wider font-medium">Email Address</h2>
+                <a href="mailto:contact@globalwebtechnology.in">
+                  <span class="text-gray-300"
+                    >contact@globalwebtechnology.in</span
                   >
-                    <span class="text-gray-300">
-                      BDA Layout, 4th Block, HBR Layout, Nagavara, Bengaluru,
-                      Karnataka 560045
-                    </span>
-                  </a>
-                </div>
-                <div>
-                  <h2>Phone Number</h2>
-                  <a href="tel:+919620474135">
-                    <span class="text-gray-300">+919620474135</span>
-                  </a>
-                </div>
-                <div>
-                  <h2>Email Address</h2>
-                  <a href="mailto:contact@globalwebtechnology.in">
-                    <span class="text-gray-300"
-                      >contact@globalwebtechnology.in</span
-                    >
-                  </a>
-                </div>
+                </a>
               </div>
             </div>
-            <form
-              class="flex flex-col gap-2 w-full md:w-2/4 lg:w-1/4 xl:1-1/6 justify-center mx-auto h-full"
-              id="contact-form"
-            >
-              <h1 class="text-white py-4 lg:py-8 lg:text-2xl xl:text-3xl">
-                Connect With Us
-              </h1>
-               <div class="mb-2">
-                  <label for="username" class="block text-sm font-medium text-gray-300 ">Name</label>
-                  <input type="text" id="username" name="Name" class="mt-1 block w-full py-2 px-2 rounded-sm text-black" required>
-                  <span id="usernameError" class="text-red-500 text-xs"></span>
-              </div>
-               <div class="mb-2">
-                  <label for="number" class="block text-sm font-medium text-gray-300">Mobile Number</label>
-                  <input type="number" id="number" name="Number" class="mt-1 block w-full py-2 px-2 rounded-sm text-black appearance-none" required>
-                  <span id="numberError" class="text-red-500 text-xs"></span>
-              </div>
-               <div class="mb-2">
-                  <label for="company" class="block text-sm font-medium text-gray-300">Company Name</label>
-                  <input type="text" id="company" name="Company" class="mt-1 block w-full py-2 px-2 rounded-sm text-black">
-                  <span id="companyError" class="text-red-500 text-xs"></span>
-              </div>
-             <div class="hidden mb-2">
-                  <input type="text" id="ip_address" name="IP Address" class="mt-1 block w-full py-2 rounded-sm bg-white">
-              </div>
-              <div class="hidden mb-2">
-                <input type="text" id="service_type" name="Type of Service" value="Didn,t fill" class="mt-1 block w-full py-2 rounded-sm bg-white">
-            </div>
-              <div class="hidden mb-2">
-                <input type="text" id="message" name="Description/ Message" value="We Would like to acquire your Services" class="mt-1 block w-full py-2 rounded-sm bg-white">
-              </div>
-              <div class="hidden mb-2">
-                <input type="text" id="email" name="Email" value="Not capturing from this form" class="mt-1 block w-full py-2 rounded-sm bg-white">
-              </div>
-              
-               <button type="submit" class="mt-4 bg-green-500 text-white py-2 px-4 rounded-sm transition-all duration-500 hover:bg-green-600">
-                  <div class="flex justify-between w-full items-center gap-10">
-                      <span>Get Free Consultation</span>
-                      <span id="spinner" class="hidden"><i class="fas fa-spinner fa-spin"></i></span>
-                  </div>
-              </button>
-            
-             
-            </form>
-
-      
           </div>
-        </app-form>
+          <form
+            class="flex flex-col gap-2 w-full md:w-2/4 lg:w-1/4 xl:1-1/6 justify-center mx-auto h-full"
+            id="contact-form"
+          >
+            <h1 class="text-white py-4 lg:py-8 lg:text-2xl xl:text-3xl">
+              Connect With Us
+            </h1>
+            <div class="mb-2">
+              <label
+                for="username"
+                class="block text-sm font-medium text-gray-300"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="username"
+                name="Name"
+                class="mt-1 block w-full py-2 px-2 rounded-sm text-black"
+                required
+              />
+              <span id="usernameError" class="text-red-500 text-xs"></span>
+            </div>
+            <div class="mb-2">
+              <label
+                for="number"
+                class="block text-sm font-medium text-gray-300"
+                >Mobile Number</label
+              >
+              <input
+                type="number"
+                id="number"
+                name="Number"
+                class="mt-1 block w-full py-2 px-2 rounded-sm text-black appearance-none"
+                required
+              />
+              <span id="numberError" class="text-red-500 text-xs"></span>
+            </div>
+            <div class="mb-2">
+              <label
+                for="company"
+                class="block text-sm font-medium text-gray-300"
+                >Company Name</label
+              >
+              <input
+                type="text"
+                id="company"
+                name="Company"
+                class="mt-1 block w-full py-2 px-2 rounded-sm text-black"
+              />
+              <span id="companyError" class="text-red-500 text-xs"></span>
+            </div>
+            <div class="hidden mb-2">
+              <input
+                type="text"
+                id="ip_address"
+                name="IP Address"
+                class="mt-1 block w-full py-2 rounded-sm bg-white"
+              />
+            </div>
+            <div class="hidden mb-2">
+              <input
+                type="text"
+                id="service_type"
+                name="Type of Service"
+                value="Didn,t fill"
+                class="mt-1 block w-full py-2 rounded-sm bg-white"
+              />
+            </div>
+            <div class="hidden mb-2">
+              <input
+                type="text"
+                id="message"
+                name="Description/ Message"
+                value="We Would like to acquire your Services"
+                class="mt-1 block w-full py-2 rounded-sm bg-white"
+              />
+            </div>
+            <div class="hidden mb-2">
+              <input
+                type="text"
+                id="email"
+                name="Email"
+                value="Not capturing from this form"
+                class="mt-1 block w-full py-2 rounded-sm bg-white"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="mt-4 bg-green-500 text-white py-2 px-4 rounded-sm transition-all duration-500 hover:bg-green-600 "
+            >
+              <div class="flex justify-center w-full items-center gap-10">
+                <span>Get Free Consultation</span>
+                <span id="spinner" class="hidden"
+                  ><i class="fas fa-spinner fa-spin"></i
+                ></span>
+              </div>
+            </button>
+          </form>
+        </div>
       </section>
       <!-- This is footer -->
       <section id="footer" class="bg-white text-lg px-2 lg:px-8 xl:px-12">
@@ -506,111 +555,106 @@
       </section>
     </div>
   </body>
-  <!-- <script src="./script.js"></script> -->
-
 
   <!-- email.js cdn-->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+  ></script>
+
   <script type="text/javascript">
-      (function() {
-          
-          emailjs.init({
-            publicKey: "z4egy2OwxEM9cNjow",
-          });
-      })();
-     
+    (function () {
+      emailjs.init({
+        publicKey: "z4egy2OwxEM9cNjow",
+      });
+    })();
   </script>
+
+  <script src="./script.js"></script>
+
   <script>
+    function fetchIPAddress() {
+      fetch("https://api.ipify.org?format=json")
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("ip_address").value = data.ip;
+        })
+        .catch((error) => {
+          document.getElementById("ip_address").value =
+            "Couldn't fetch IP address";
+        });
+    }
 
-  function fetchIPAddress() {
+    // Call the fetchIPAddress function when the page loads
+    fetchIPAddress();
 
-                fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                
-                    document.getElementById('ip_address').value = data.ip;
-                })
-                .catch(error => {
-                  document.getElementById('ip_address').value ="Couldn't fetch IP address";
-                });
-  }
+    //Submitting the Contact Form
+    document
+      .getElementById("contact-form")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
 
-  // Call the fetchIPAddress function when the page loads
-  fetchIPAddress();
+        // Clear previous error messages
+        document.getElementById("usernameError").textContent = "";
+        document.getElementById("numberError").textContent = "";
+        document.getElementById("companyError").textContent = "";
+        // Get form values
+        var username = document.getElementById("username").value;
+        var number = document.getElementById("number").value;
+        var company = document.getElementById("company").value;
+        var ip_address = document.getElementById("ip_address").value; // assuming this value is set elsewhere
+        // Validate inputs
+        var hasError = false;
+        if (!username) {
+          document.getElementById("usernameError").textContent =
+            "You must enter a value";
+          hasError = true;
+        }
+        if (!number) {
+          document.getElementById("numberError").textContent =
+            "You must enter a value";
+          hasError = true;
+        } else if (!/^\d{10}$/.test(number)) {
+          // Example pattern for a 10-digit number
+          document.getElementById("numberError").textContent =
+            "Not a valid phone number";
+          hasError = true;
+        }
+        if (!company) {
+          document.getElementById("companyError").textContent =
+            "You must enter a value";
+          hasError = true;
+        }
 
-      
+        if (hasError) {
+          return;
+        }
 
-document.getElementById('contact-form').addEventListener('submit',  function (event) {
-            event.preventDefault();
+        // Show loading spinner
+        document.getElementById("spinner").classList.remove("hidden");
+
+        // You can handle the form data here, e.g., send it to a server
+        emailjs.send("service_bs210nn","template_a727xic",{
+          from_name: username,
+          to_name: "Syed Farooq",
+          message: "We would like to acquire your Services",
+          number: number,
+          mail: "Not capturing from footer form",
+          ip: ip_address,
+          company: company
+        });
         
-            // Clear previous error messages
-            document.getElementById('usernameError').textContent = '';
-            document.getElementById('numberError').textContent = '';
-            document.getElementById('companyError').textContent = '';
-            // Get form values
-            var username = document.getElementById('username').value;
-            var number = document.getElementById('number').value;
-            var company = document.getElementById('company').value;
-            var ip_address = document.getElementById('ip_address').value; // assuming this value is set elsewhere
 
-            // Validate inputs
-            var hasError = false;
-            if (!username) {
-                document.getElementById('usernameError').textContent = 'You must enter a value';
-                hasError = true;
-            }
-            if (!number) {
-                document.getElementById('numberError').textContent = 'You must enter a value';
-                hasError = true;
-            } else if (!/^\d{10}$/.test(number)) { // Example pattern for a 10-digit number
-                document.getElementById('numberError').textContent = 'Not a valid phone number';
-                hasError = true;
-            }
-            if (!company) {
-                document.getElementById('companyError').textContent = 'You must enter a value';
-                hasError = true;
-            }
-
-            if (hasError) {
-                return;
-            }
-
-            // Show loading spinner
-            document.getElementById('spinner').classList.remove('hidden');
-
-    
-           
-
-//             // // You can handle the form data here, e.g., send it to a server
-//             // emailjs.send("service_bs210nn","template_a727xic",{
-//             //   from_name: username,
-//             //   to_name: "Syed Farooq",
-//             //   message: "We would like to acquire your Services",
-//             //   number: number,
-//             //   mail: "Not capturing from footer form",
-//             //   ip: ip_address,
-//             //   company: company
-//             //   });
-//       }
-       
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzvgN29cTMGbk2lpxweA5W80qGq_eVyK0CJRX5Ou3Aux0dzuY8CyRS6Y2SfkuS2o1vW/exec'
-  const form = document.forms['contact-form']
-  fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-      .then(response =>{
-
-       console.log('Success!', response);
-      alert('Form submitted successfully')
-      document.getElementById('spinner').classList.add('hidden');
-      }
-    )
-      .catch(error => console.error('Error!', error.message))
-  })
-   
-</script>
-
-
-
-
-</html>
-
-
+        const scriptURL =
+          "https://script.google.com/macros/s/AKfycbzvgN29cTMGbk2lpxweA5W80qGq_eVyK0CJRX5Ou3Aux0dzuY8CyRS6Y2SfkuS2o1vW/exec";
+        const form = document.forms["contact-form"];
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            console.log("Success!", response);
+            alert("Form submitted successfully");
+            document.getElementById("spinner").classList.add("hidden");
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+  </script>
+</html

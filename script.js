@@ -305,46 +305,47 @@ function appendServices() {
 }
 appendServices();
 
+//function to generate htmlStructure of enquiry Modal form
 function appendEnquiryModal(itemName) {
   enquiryFormModal.innerHTML = "";
 
   let htmlContent = "";
   let formHTML = `<h2 class="font-bold text-xl px-4 py-2">${itemName}</h2>
   <div class="p-4">
-    <form class="flex flex-col" onsubmit="submitForm(event)">
+    <form class="flex flex-col" id="enquiryModalForm" >
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
-        <input type="text" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required />
+        <input type="text" id="username" name="Name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required />
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">Mobile Number</label>
-        <input type="tel" name="number" maxLength="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required />
+        <input type="tel" id="number" name="Number" maxLength="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required />
       </div>
       <div class="hidden">
-        <input type="text" name="category" />
+        <input type="text" id="company" name="Company" value="Not Available from Enquiry Form." />
       </div>
       <div class="hidden">
-        <input type="text" name="type" />
-      </div>
-      <div class="hidden">
-        <input type="text" name="ip_address" />
+        <input type="text" id="ip_address" name="IP_Address" />
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2">Type</label>
-        <select name="select" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required placeholder="Click to select a type" >
-        <option>Click to choose </option>
+        <label class="block text-gray-700 text-sm font-bold mb-2">Type of Service</label>
+        <select id="service_type" name="Type of Service" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-300 " required placeholder="Click to select a type" >
+        <option value="Didn,t fill" >Click to choose </option>
         ${generateOptionsHTML(itemName)}
         </select>
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">Describe your project</label>
-        <textarea name="describe" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+        <textarea id="message" name="Description/ Message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
       </div>
       <div class="flex gap-4 justify-end">
-        <button type="button" class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="closeDialog()">Cancel</button>
+        <button type="button" class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="closeEnquiryModal()">Cancel</button>
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
           <div class="flex justify-between items-center w-full gap-2">
             <span>Submit</span>
+            <div class="hidden flex items-center" id="spinner">
+              <div class="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
           </div>
         </button>
       </div>
@@ -356,6 +357,13 @@ function appendEnquiryModal(itemName) {
   enquiryFormModal.innerHTML = htmlContent;
 }
 
+//function to close modal by close button
+function closeEnquiryModal() {
+  enquiryFormModal.close();
+  enquiryFormModal.style.display = "none";
+}
+
+//function to generate options dynamically
 function generateOptionsHTML(itemName) {
   let optionsHTML = "";
   for (const option of serviceItemOptions) {
@@ -366,11 +374,105 @@ function generateOptionsHTML(itemName) {
   return optionsHTML;
 }
 
+// Function to add event listener for form submission
+function addFormSubmitListener() {
+  document.addEventListener("submit", function (event) {
+    if (event.target && event.target.id === "enquiryModalForm") {
+      event.preventDefault();
+
+      // Your form submission logic here...
+      // Function to fetch the IP address
+      async function fetchIPAddress() {
+        try {
+          const response = await fetch("https://api.ipify.org?format=json");
+          const data = await response.json();
+          return data.ip;
+        } catch (error) {
+          console.error("Error fetching IP address:", error);
+          return "Couldn't fetch IP address";
+        }
+      }
+
+      // Function to submit the form
+      function submitForm(ipAddress) {
+        // Show loading spinner
+        document.getElementById("spinner").classList.remove("hidden");
+
+        // Get form values
+        let username = document.querySelector(
+          "#enquiryModalForm #username"
+        ).value;
+        let number = document.querySelector("#enquiryModalForm #number").value;
+        let company = document.querySelector(
+          "#enquiryModalForm #company"
+        ).value;
+        let ip_address = ipAddress;
+        let service_type = document.querySelector(
+          "#enquiryModalForm #service_type"
+        ).value;
+        let message = document.querySelector(
+          "#enquiryModalForm #message"
+        ).value;
+
+        // You can handle the form data here, e.g., send it to a server
+        emailjs.send("service_bs210nn", "template_a727xic", {
+          from_name: username,
+          to_name: "Syed Farooq",
+          message: message,
+          number: number,
+          mail: "Not capturing from enquiry form",
+          ip: ip_address,
+          company: company,
+        });
+
+        // Submit the form data
+        const scriptURL =
+          "https://script.google.com/macros/s/AKfycbzvgN29cTMGbk2lpxweA5W80qGq_eVyK0CJRX5Ou3Aux0dzuY8CyRS6Y2SfkuS2o1vW/exec";
+
+        const form = document.forms["enquiryModalForm"];
+
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            if (response.ok) {
+              console.log("Success!", response);
+              alert("Form submitted successfully");
+            } else {
+              console.error("Error submitting form:", response.statusText);
+              alert("An error occurred while submitting the form");
+            }
+          })
+          .catch((error) => {
+            console.error("Error submitting form:", error);
+            alert("An error occurred while submitting the form");
+          })
+          .finally(() => {
+            // Hide loading spinner
+            document.getElementById("spinner").classList.add("hidden");
+            closeEnquiryModal();
+          });
+      }
+
+      // Call fetchIPAddress to get the IP address and then submit the form
+      fetchIPAddress().then((ipAddress) => {
+        // Submit the form with the fetched IP address
+        submitForm.call(this, ipAddress);
+      });
+    }
+  });
+}
+
+//function to show the enquiryModal
 function showEnquiryModal(itemName) {
   enquiryFormModal.showModal();
   enquiryFormModal.style.display = "block";
   appendEnquiryModal(itemName);
-  console.log(itemName);
+  addFormSubmitListener(); // Add the event listener after appending the form
+}
+
+//function to close modal by close button
+function closeEnquiryModal() {
+  enquiryFormModal.close();
+  enquiryFormModal.style.display = "none";
 }
 
 //Function to close modal when clicked outside

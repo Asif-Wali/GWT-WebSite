@@ -62,8 +62,20 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
+    <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+          /* display: none; <- Crashes Chrome on hover */
+          -webkit-appearance: none;
+          margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+      }
+
+      input[type=number] {
+          -moz-appearance:textfield; /* Firefox */
+      }
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./styles.css" />
+    <!-- <link rel="stylesheet" href="./styles.css" /> -->
     <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.1/src-min/ace.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -117,7 +129,10 @@
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "hdydndnsvy");
     </script>
+
   </head>
+  <body >
+      
   <body class="mat-typography">
     <div class="w-full scroll-smooth">
       <section id="home" class="h-screen bg-[#161113]">
@@ -377,67 +392,50 @@
             </div>
             <form
               class="flex flex-col gap-2 w-full md:w-2/4 lg:w-1/4 xl:1-1/6 justify-center mx-auto h-full"
-              (submit)="sendEmail($event)"
+              id="contact-form"
             >
               <h1 class="text-white py-4 lg:py-8 lg:text-2xl xl:text-3xl">
                 Connect With Us
               </h1>
-              <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  name="username"
-                  [formControl]="username"
-                  required
-                />
-                <mat-error *ngIf="username.invalid"
-                  >{{ getErrorMessage() }}</mat-error
-                >
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Mobile Number</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  name="number"
-                  required
-                  [formControl]="number"
-                />
-                <mat-error *ngIf="number.invalid"
-                  >{{ getErrorMessage() }}</mat-error
-                >
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Company Name</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [formControl]="company"
-                  name="company_name"
-                />
-              </mat-form-field>
-              <div class="hidden">
-                <mat-form-field>
-                  <input
-                    matInput
-                    type="text"
-                    [formControl]="ip_address"
-                    name="ip_address"
-                  />
-                </mat-form-field>
+               <div class="mb-2">
+                  <label for="username" class="block text-sm font-medium text-gray-300 ">Name</label>
+                  <input type="text" id="username" name="Name" class="mt-1 block w-full py-2 px-2 rounded-sm text-black" required>
+                  <span id="usernameError" class="text-red-500 text-xs"></span>
               </div>
-              <button mat-raised-button type="submit">
-                <div class="flex justify-between w-full items-center gap-10">
-                  <span>Get Free Consultation</span>
-                  <mat-spinner
-                    *ngIf="isLoading"
-                    strokeWidth="3"
-                    diameter="20"
-                  ></mat-spinner>
-                </div>
+               <div class="mb-2">
+                  <label for="number" class="block text-sm font-medium text-gray-300">Mobile Number</label>
+                  <input type="number" id="number" name="Number" class="mt-1 block w-full py-2 px-2 rounded-sm text-black appearance-none" required>
+                  <span id="numberError" class="text-red-500 text-xs"></span>
+              </div>
+               <div class="mb-2">
+                  <label for="company" class="block text-sm font-medium text-gray-300">Company Name</label>
+                  <input type="text" id="company" name="Company" class="mt-1 block w-full py-2 px-2 rounded-sm text-black">
+                  <span id="companyError" class="text-red-500 text-xs"></span>
+              </div>
+             <div class="hidden mb-2">
+                  <input type="text" id="ip_address" name="IP Address" class="mt-1 block w-full py-2 rounded-sm bg-white">
+              </div>
+              <div class="hidden mb-2">
+                <input type="text" id="service_type" name="Type of Service" value="Didn,t fill" class="mt-1 block w-full py-2 rounded-sm bg-white">
+            </div>
+              <div class="hidden mb-2">
+                <input type="text" id="message" name="Description/ Message" value="We Would like to acquire your Services" class="mt-1 block w-full py-2 rounded-sm bg-white">
+              </div>
+              <div class="hidden mb-2">
+                <input type="text" id="email" name="Email" value="Not capturing from this form" class="mt-1 block w-full py-2 rounded-sm bg-white">
+              </div>
+              
+               <button type="submit" class="mt-4 bg-green-500 text-white py-2 px-4 rounded-sm transition-all duration-500 hover:bg-green-600">
+                  <div class="flex justify-between w-full items-center gap-10">
+                      <span>Get Free Consultation</span>
+                      <span id="spinner" class="hidden"><i class="fas fa-spinner fa-spin"></i></span>
+                  </div>
               </button>
+            
+             
             </form>
+
+      
           </div>
         </app-form>
       </section>
@@ -508,6 +506,111 @@
       </section>
     </div>
   </body>
+  <!-- <script src="./script.js"></script> -->
+
+
+  <!-- email.js cdn-->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+      (function() {
+          
+          emailjs.init({
+            publicKey: "z4egy2OwxEM9cNjow",
+          });
+      })();
+     
+  </script>
+  <script>
+
+  function fetchIPAddress() {
+
+                fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                
+                    document.getElementById('ip_address').value = data.ip;
+                })
+                .catch(error => {
+                  document.getElementById('ip_address').value ="Couldn't fetch IP address";
+                });
+  }
+
+  // Call the fetchIPAddress function when the page loads
+  fetchIPAddress();
+
+      
+
+document.getElementById('contact-form').addEventListener('submit',  function (event) {
+            event.preventDefault();
+        
+            // Clear previous error messages
+            document.getElementById('usernameError').textContent = '';
+            document.getElementById('numberError').textContent = '';
+            document.getElementById('companyError').textContent = '';
+            // Get form values
+            var username = document.getElementById('username').value;
+            var number = document.getElementById('number').value;
+            var company = document.getElementById('company').value;
+            var ip_address = document.getElementById('ip_address').value; // assuming this value is set elsewhere
+
+            // Validate inputs
+            var hasError = false;
+            if (!username) {
+                document.getElementById('usernameError').textContent = 'You must enter a value';
+                hasError = true;
+            }
+            if (!number) {
+                document.getElementById('numberError').textContent = 'You must enter a value';
+                hasError = true;
+            } else if (!/^\d{10}$/.test(number)) { // Example pattern for a 10-digit number
+                document.getElementById('numberError').textContent = 'Not a valid phone number';
+                hasError = true;
+            }
+            if (!company) {
+                document.getElementById('companyError').textContent = 'You must enter a value';
+                hasError = true;
+            }
+
+            if (hasError) {
+                return;
+            }
+
+            // Show loading spinner
+            document.getElementById('spinner').classList.remove('hidden');
+
+    
+           
+
+//             // // You can handle the form data here, e.g., send it to a server
+//             // emailjs.send("service_bs210nn","template_a727xic",{
+//             //   from_name: username,
+//             //   to_name: "Syed Farooq",
+//             //   message: "We would like to acquire your Services",
+//             //   number: number,
+//             //   mail: "Not capturing from footer form",
+//             //   ip: ip_address,
+//             //   company: company
+//             //   });
+//       }
+       
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzvgN29cTMGbk2lpxweA5W80qGq_eVyK0CJRX5Ou3Aux0dzuY8CyRS6Y2SfkuS2o1vW/exec'
+  const form = document.forms['contact-form']
+  fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+      .then(response =>{
+
+       console.log('Success!', response);
+      alert('Form submitted successfully')
+      document.getElementById('spinner').classList.add('hidden');
+      }
+    )
+      .catch(error => console.error('Error!', error.message))
+  })
+   
+</script>
+
+
+
+
 </html>
 
-<script src="./script.js"></script>
+

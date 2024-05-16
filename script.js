@@ -335,7 +335,7 @@ function appendEnquiryModal(itemName) {
         <input type="text" id="company" name="Company" value="Not Available from Enquiry Form." />
       </div>
       <div class="hidden">
-        <input type="text" id="ip_address" name="IP_Address" />
+        <input type="text" id="ip_addressEnquiry" name="IP Address" />
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">Type of Service</label>
@@ -386,25 +386,28 @@ function generateOptionsHTML(itemName) {
 
 // Function to add event listener for form submission
 function addFormSubmitListener() {
+  // Function to fetch the IP address
+  function fetchIPAddress() {
+    fetch("https://api.ipify.org?format=json")
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("ip_addressEnquiry").value = data.ip;
+      })
+      .catch((error) => {
+        document.getElementById("ip_addressEnquiry").value =
+          "Couldn't fetch IP address";
+      });
+  }
+
+  // Call the fetchIPAddress function when the page loads
+  fetchIPAddress();
+
   document.addEventListener("submit", function (event) {
     if (event.target && event.target.id === "enquiryModalForm") {
       event.preventDefault();
 
-      // Your form submission logic here...
-      // Function to fetch the IP address
-      async function fetchIPAddress() {
-        try {
-          const response = await fetch("https://api.ipify.org?format=json");
-          const data = await response.json();
-          return data.ip;
-        } catch (error) {
-          console.error("Error fetching IP address:", error);
-          return "Couldn't fetch IP address";
-        }
-      }
-
       // Function to submit the form
-      function submitForm(ipAddress) {
+      function submitForm() {
         // Show loading spinner
         document.getElementById("spinner").classList.remove("hidden");
 
@@ -416,7 +419,9 @@ function addFormSubmitListener() {
         let company = document.querySelector(
           "#enquiryModalForm #company"
         ).value;
-        let ip_address = ipAddress;
+        let ip_address = document.querySelector(
+          "#enquiryModalForm #ip_addressEnquiry"
+        ).value;
         let service_type = document.querySelector(
           "#enquiryModalForm #service_type"
         ).value;
@@ -424,16 +429,30 @@ function addFormSubmitListener() {
           "#enquiryModalForm #message"
         ).value;
 
+        // Create your custom object with the form data
+        // let formData = {
+        //   Name: username,
+        //   Number: number,
+        //   Company: company,
+        //   IP_Address: ip_address,
+        //   Type_of_Service: service_type,
+        //   Message: message,
+        // };
+
+        // Convert the custom object to JSON
+        // let requestBody = JSON.stringify(formData);
+        // console.log(requestBody);
+
         // You can handle the form data here, e.g., send it to a server
-        emailjs.send("service_bs210nn", "template_a727xic", {
-          from_name: username,
-          to_name: "Syed Farooq",
-          message: message,
-          number: number,
-          mail: "Not capturing from enquiry form",
-          ip: ip_address,
-          company: company,
-        });
+        // emailjs.send("service_bs210nn", "template_a727xic", {
+        //   from_name: username,
+        //   to_name: "Syed Farooq",
+        //   message: message,
+        //   number: number,
+        //   mail: "Not capturing from enquiry form",
+        //   ip: ip_address,
+        //   company: company,
+        // });
 
         // Submit the form data
         const scriptURL =
@@ -462,11 +481,7 @@ function addFormSubmitListener() {
           });
       }
 
-      // Call fetchIPAddress to get the IP address and then submit the form
-      fetchIPAddress().then((ipAddress) => {
-        // Submit the form with the fetched IP address
-        submitForm.call(this, ipAddress);
-      });
+      submitForm();
     }
   });
 }

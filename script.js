@@ -1,8 +1,18 @@
 const onClickScroll = (elementId) => {
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-  }
+  // Get the navbar height
+  let navbarHeight = document.getElementById("topbar").offsetHeight;
+
+  // Get the target element
+  let element = document.getElementById(elementId);
+
+  // Calculate the scroll position by subtracting the navbar height
+  let scrollPosition = element.offsetTop - navbarHeight;
+
+  // Scroll to the adjusted position
+  window.scrollTo({
+    top: scrollPosition,
+    behavior: "smooth",
+  });
 };
 
 const showMenuButton = document.getElementById("showMenuButton");

@@ -133,6 +133,27 @@
 
   <body class="mat-typography">
     <div class="w-full scroll-smooth">
+      <!-- Form to catch IpAddress on visit -->
+      <form class="hidden" id="visitingForm" >
+        <div class="hidden mb-2">
+          <input
+            type="text"
+            id="ip_addressVisit"
+            name="IP Address"
+            class="mt-1 block w-full py-2 rounded-sm bg-white"
+          />
+        </div>
+
+        <div class="hidden mb-2">
+          <input
+            type="text"
+            id="messageVisit"
+            name="Description/ Message"
+            value="Visited Website."
+            class="mt-1 block w-full py-2 rounded-sm bg-white"
+          />
+        </div>
+      </form>
       <section id="home" class="h-screen bg-[#161113]">
         <!-- This is header -->
         <div

@@ -636,3 +636,43 @@ function appendWhyUs() {
   container.innerHTML = htmlContent;
 }
 appendWhyUs();
+
+//Catching Ip address on visit nd storing it in sheet.
+window.addEventListener("load", function () {
+  fetch("https://api.ipify.org?format=json")
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("ip_addressVisit").value = data.ip;
+      submitFormData(data.ip);
+    })
+    .catch((error) => {
+      console.error("Error fetching IP address:", error);
+      submitFormData("");
+    });
+});
+
+function submitFormData(ipAddress) {
+  const scriptURL =
+    "https://script.google.com/macros/s/AKfycbzvgN29cTMGbk2lpxweA5W80qGq_eVyK0CJRX5Ou3Aux0dzuY8CyRS6Y2SfkuS2o1vW/exec";
+  const form = document.forms["visitingForm"];
+  const formData = new FormData(form);
+  formData.append("IP Address", ipAddress);
+
+  fetch(scriptURL, { method: "POST", body: formData })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Form submitted successfully");
+        // Display success message to the user
+      } else {
+        console.error("Error submitting form:", response.statusText);
+        // Display error message to the user
+      }
+    })
+    .catch((error) => {
+      console.error("Error submitting form:", error);
+      // Display error message to the user
+    });
+
+  // Remove the form data from the URL
+  history.replaceState({}, document.title, window.location.pathname);
+}

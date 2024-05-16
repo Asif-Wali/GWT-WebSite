@@ -335,6 +335,9 @@ function appendEnquiryModal(itemName) {
         <input type="text" id="company" name="Company" value="Not Available from Enquiry Form." />
       </div>
       <div class="hidden">
+      <input type="text" id="email" name="Email" value="Not Available from Enquiry Form." />
+    </div>
+      <div class="hidden">
         <input type="text" id="ip_addressEnquiry" name="IP Address" />
       </div>
       <div class="mb-4">
@@ -429,30 +432,16 @@ function addFormSubmitListener() {
           "#enquiryModalForm #message"
         ).value;
 
-        // Create your custom object with the form data
-        // let formData = {
-        //   Name: username,
-        //   Number: number,
-        //   Company: company,
-        //   IP_Address: ip_address,
-        //   Type_of_Service: service_type,
-        //   Message: message,
-        // };
-
-        // Convert the custom object to JSON
-        // let requestBody = JSON.stringify(formData);
-        // console.log(requestBody);
-
         // You can handle the form data here, e.g., send it to a server
-        // emailjs.send("service_bs210nn", "template_a727xic", {
-        //   from_name: username,
-        //   to_name: "Syed Farooq",
-        //   message: message,
-        //   number: number,
-        //   mail: "Not capturing from enquiry form",
-        //   ip: ip_address,
-        //   company: company,
-        // });
+        emailjs.send("service_bs210nn", "template_a727xic", {
+          from_name: username,
+          to_name: "Syed Farooq",
+          message: message,
+          number: number,
+          mail: "Not capturing from enquiry form",
+          ip: ip_address,
+          company: company,
+        });
 
         // Submit the form data
         const scriptURL =
